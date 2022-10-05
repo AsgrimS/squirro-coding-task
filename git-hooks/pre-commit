@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Running linter checks..."
+make lint_check
