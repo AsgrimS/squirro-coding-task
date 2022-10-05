@@ -5,11 +5,27 @@ description = ""
 authors = ["AsgrimS <jan.semik@gmail.com>"]
 readme = "README.md"
 
+[tool.black]
+line-length = 120
+target-version = ['py310']
+
+[tool.flake8]
+max-line-length = 120
+
+[tool.isort]
+profile = "black"
+
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10, <3.11"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
 
+[tool.poetry.group.dev.dependencies]
+black = "^22.8.0"
+isort = "^5.10.1"
+flake8 = "^5.0.4"
+flake8-isort = "^4.2.0"
+pytype = "^2022.9.27"
 
 [build-system]
 requires = ["poetry-core"]
