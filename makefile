@@ -20,10 +20,8 @@ add_dev_dependency:
 lint:
 	docker compose run --rm fastapi sh -c "poetry run black . && \
 	poetry run isort --overwrite-in-place app && \
-	poetry run flake8 && \
-	poetry run pytype app"
+	poetry run flake8"
 
 lint_check:
 	docker compose run --rm fastapi sh -c "poetry run flake8 && \
-	poetry run black --check . && \
-	poetry run pytype app"
+	poetry run black --check ."

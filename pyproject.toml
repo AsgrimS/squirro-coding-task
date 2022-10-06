@@ -9,9 +9,6 @@ readme = "README.md"
 line-length = 120
 target-version = ['py310']
 
-[tool.flake8]
-max-line-length = 120
-
 [tool.isort]
 profile = "black"
 
@@ -19,13 +16,14 @@ profile = "black"
 python = ">=3.10, <3.11"
 fastapi = "^0.85.0"
 uvicorn = "^0.18.3"
+motor = "^3.0.0"
+pydantic = {extras = ["dotenv"], version = "^1.10.2"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.8.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
 flake8-isort = "^4.2.0"
-pytype = "^2022.9.27"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,5 +1,6 @@
 services:
   fastapi:
+    container_name: squirro_fastapi
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -8,3 +9,25 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: squirro_fastapi_mongo_db
+    ports:
+      - "27017:27017"
+    env_file: .env
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_PASSWORD: ${MONGO_PASSWORD}
+
+    volumes:
+        - mongo_data:/data/db
+        - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+
+volumes:
+  mongo_data:
