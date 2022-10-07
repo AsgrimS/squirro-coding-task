@@ -114,6 +114,21 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "en-core-web-sm"
+version = "3.4.0"
+description = "English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+spacy = ">=3.4.0,<3.5.0"
+
+[package.source]
+type = "url"
+url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0.tar.gz"
+
+[[package]]
 name = "fastapi"
 version = "0.85.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -694,7 +709,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10, <3.11"
-content-hash = "bd83a03dca6e7e24a3c5118a0c43100c280abbb89830f51162b915f2e5122c11"
+content-hash = "9b93086206f3154185d8d10ad94e929054674974bfe315ed5ea484d56aa72512"
 
 [metadata.files]
 anyio = [
@@ -791,6 +806,7 @@ cymem = [
     {file = "cymem-2.0.6-cp39-cp39-win_amd64.whl", hash = "sha256:c59293b232b53ebb47427f16cf648e937022f489cff36c11d1d8a1f0075b6609"},
     {file = "cymem-2.0.6.tar.gz", hash = "sha256:169725b5816959d34de2545b33fee6a8021a6e08818794a426c5a4f981f17e5e"},
 ]
+en-core-web-sm = []
 fastapi = [
     {file = "fastapi-0.85.0-py3-none-any.whl", hash = "sha256:1803d962f169dc9f8dde54a64b22eb16f6d81573f54401971f90f0a67234a8b4"},
     {file = "fastapi-0.85.0.tar.gz", hash = "sha256:bb219cfafd0d2ccf8f32310c9a257a06b0210bd8e2a03706a6f5a9f9f1416878"},
