@@ -26,7 +26,10 @@ add_dependency:
 	docker compose run --rm fastapi poetry add $$name
 
 add_dev_dependency:
-	docker compose run --rm fastapi poetry add --dev $$name
+	docker compose run --rm fastapi poetry add -G dev $$name
+
+remove_dependency:
+	docker compose run --rm fastapi poetry remove $$name
 
 lint:
 	docker compose run --rm fastapi sh -c "poetry run black . && \
