@@ -20,6 +20,7 @@ It is capable of storing, retrieving and deleting simple text documents. It also
 - `make attach` - Attach to the running API container to see the FastAPI output.
 - `make shell` - Attach to the running API container and open an interactive shell.
 - `make stop` - Stop the running API and MongoDB containers.
+- `make test` - Run the tests.'
 - `make clean` - Stop the running API and MongoDB containers and remove them along with the volumes **(WARNING: deletes MongoDB data)**.
 - `make add_dependency` - Add a new project dependency. Takes in a `name` argument. Example: `make add_dependency name=numpy`
 - `make add_dev_dependency` - Add a new project development dependency. Takes in a `name` argument. Example: `make add_dev_dependency name=black`
