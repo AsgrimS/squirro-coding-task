@@ -4,7 +4,7 @@ from motor import motor_asyncio
 from app.settings import settings
 
 
-async def _get_db():
+async def get_db():
     client = motor_asyncio.AsyncIOMotorClient(
         f"mongodb://{settings.mongo_username}:{settings.mongo_password}@mongo:27017/{settings.mongo_db}"
     )
@@ -14,5 +14,5 @@ async def _get_db():
         client.close()
 
 
-async def get_documents_collection(db=Depends(_get_db)):
+async def get_documents_collection(db=Depends(get_db)):
     return db["documents"]

@@ -29,5 +29,18 @@ services:
         - ./mongo_data:/data/db
         - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
 
+  mongo_test:
+    image: mongo
+    container_name: squirro_fastapi_mongo_db_test
+    environment:
+      MONGO_INITDB_DATABASE: squirrodb_test
+      MONGO_INITDB_ROOT_USERNAME: root_test
+      MONGO_INITDB_ROOT_PASSWORD: root_test123
+      MONGO_INITDB_USERNAME: test
+      MONGO_INITDB_PASSWORD: test123
+
+    volumes:
+        - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+
 volumes:
   mongo_data:

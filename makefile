@@ -4,6 +4,7 @@ install:
 	#docker compose run --rm fastapi sh -c "python -m spacy download en_core_web_sm"
 
 reinstall:
+	docker compose down
 	docker compose build --no-cache fastapi
 
 run:
@@ -11,6 +12,10 @@ run:
 
 stop:
 	docker compose stop
+
+test:
+	docker compose up mongo_test -d
+	docker compose run --rm fastapi sh -c "pytest"
 
 clean:
 	docker compose run --rm fastapi sh -c "rm -rf mongo_data"
@@ -33,7 +38,7 @@ remove_dependency:
 
 lint:
 	docker compose run --rm fastapi sh -c "poetry run black . && \
-	poetry run isort --overwrite-in-place app && \
+	poetry run isort --overwrite-in-place app tests && \
 	poetry run flake8"
 
 lint_check:
