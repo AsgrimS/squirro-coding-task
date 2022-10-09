@@ -1,4 +1,6 @@
 import pytest
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
 from httpx import AsyncClient
 from motor import motor_asyncio
 
@@ -18,6 +20,12 @@ async def db_override():
 
 
 app.dependency_overrides[get_db] = db_override
+FastAPICache.init(InMemoryBackend(), prefix="test")
+
+
+@pytest.fixture(autouse=True)
+async def clear_cache():
+    await FastAPICache.clear(namespace="test")
 
 
 @pytest.fixture
@@ -43,5 +51,5 @@ async def db():
 
 
 @pytest.fixture
-async def documents_collection(db):
+def documents_collection(db):
     return db["documents"]

@@ -6,9 +6,18 @@ from fastapi_cache.decorator import cache
 
 from app.database import get_documents_collection
 from app.models.documents import Document, DocumentBase, DocumentInput
+from app.settings import settings
 from app.summarize import get_summarization
 
 router = APIRouter()
+
+
+class DocumentNotFoundException(HTTPException):
+    def __init__(self, document_id: str):
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Document with id '{document_id}' not found",
+        )
 
 
 @router.post("/", description="Add a new document.", response_model=DocumentBase, status_code=status.HTTP_201_CREATED)
@@ -30,7 +39,7 @@ async def get_document(doc_id: str, documents_collection=Depends(get_documents_c
     if (document := await documents_collection.find_one({"_id": doc_id})) is not None:
         return document
 
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Document {doc_id} not found")
+    raise DocumentNotFoundException(doc_id)
 
 
 @router.delete("/{doc_id}", description="Delete a single document by id.", status_code=status.HTTP_204_NO_CONTENT)
@@ -39,11 +48,11 @@ async def delete_document(doc_id: str, documents_collection=Depends(get_document
     if results.deleted_count == 1:
         return
 
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Document {doc_id} not found")
+    raise DocumentNotFoundException(doc_id)
 
 
 @router.get("/summarize/{doc_id}", description="Summarize a single document by id. Cached for 10 minutes.")
-@cache(expire=60 * 10)
+@cache(expire=settings.summarization_cache_timeout)
 async def summarize_document(
     doc_id: str,
     summary_percentage: float = Query(
@@ -52,6 +61,6 @@ async def summarize_document(
     documents_collection=Depends(get_documents_collection),
 ):
     if (document := await documents_collection.find_one({"_id": doc_id})) is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Document {doc_id} not found")
+        raise DocumentNotFoundException(doc_id)
 
     return {"summary": get_summarization(document["content"], summary_percentage)}

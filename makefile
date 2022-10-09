@@ -15,7 +15,7 @@ stop:
 
 test:
 	docker compose up mongo_test -d
-	docker compose run --rm fastapi sh -c "pytest"
+	docker compose run --rm fastapi sh -c "pytest --verbose"
 
 clean:
 	docker compose run --rm fastapi sh -c "rm -rf mongo_data"
