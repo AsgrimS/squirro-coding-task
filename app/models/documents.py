@@ -40,3 +40,8 @@ class DocumentInput(Document):
                 "content": "Document content",
             }
         }
+
+
+class DocumentSummary(BaseModel):
+    id: str = Field(..., alias="_id")
+    summary: str

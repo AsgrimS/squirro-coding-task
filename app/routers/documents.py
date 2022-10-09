@@ -5,7 +5,7 @@ from fastapi.routing import APIRouter
 from fastapi_cache.decorator import cache
 
 from app.database import get_documents_collection
-from app.models.documents import Document, DocumentBase, DocumentInput
+from app.models.documents import Document, DocumentBase, DocumentInput, DocumentSummary
 from app.settings import settings
 from app.summarize import get_summarization
 
@@ -51,7 +51,11 @@ async def delete_document(doc_id: str, documents_collection=Depends(get_document
     raise DocumentNotFoundException(doc_id)
 
 
-@router.get("/summarize/{doc_id}", description="Summarize a single document by id. Cached for 10 minutes.")
+@router.get(
+    "/summarize/{doc_id}",
+    description="Summarize a single document by id. Cached for 10 minutes.",
+    response_model=DocumentSummary,
+)
 @cache(expire=settings.summarization_cache_timeout)
 async def summarize_document(
     doc_id: str,
@@ -63,4 +67,4 @@ async def summarize_document(
     if (document := await documents_collection.find_one({"_id": doc_id})) is None:
         raise DocumentNotFoundException(doc_id)
 
-    return {"summary": get_summarization(document["content"], summary_percentage)}
+    return {"_id": document["_id"], "summary": get_summarization(document["content"], summary_percentage)}

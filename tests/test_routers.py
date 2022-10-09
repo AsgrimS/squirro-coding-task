@@ -94,7 +94,7 @@ async def test_summarize_document(client, documents_collection):
     response = await client.get(f"/documents/summarize/{new_document.inserted_id}", params={"summary_percentage": 1})
 
     assert response.status_code == 200
-    assert response.json() == {"summary": "Test content"}
+    assert response.json() == {"_id": new_document.inserted_id, "summary": "Test content"}
 
 
 @pytest.mark.anyio
