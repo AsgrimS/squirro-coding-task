@@ -1,7 +1,6 @@
 install:
 	cp ./git-hooks/* .git/hooks/
 	docker compose build fastapi
-	#docker compose run --rm fastapi sh -c "python -m spacy download en_core_web_sm"
 
 reinstall:
 	docker compose down
