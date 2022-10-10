@@ -6,9 +6,6 @@ authors = ["AsgrimS <jan.semik@gmail.com>"]
 readme = "README.md"
 
 [tool.pytest.ini_options]
-#addopts = """
-#    --cov
-#"""
 pythonpath = ["."]
 testpaths = ["tests"]
 
