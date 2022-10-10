@@ -37,7 +37,7 @@ It is capable of storing, retrieving and deleting simple text documents. It also
 - Optimize for production. (For example, use gunicorn instead of uvicorn, use nginx as a reverse proxy, etc.)
 
 ### Project assumptions
-- The API is does not require authentication.
+- The API does not require authentication.
 - MongoDB was chosen as the database because it is easy to setup, use and is easier to scale horizontally than a relational database. (Also I wanted to work with something new)
 - Everything is dockerized. No need to install anything on the host machine. (except docker and docker-compose).
-- Since FastAPI is used, the API is async by default. (This is why the MongoDB client is also async.)
+- Since FastAPI is used, the API is async by default and tests are async. (This is why the MongoDB client is also async.)
