@@ -20,10 +20,24 @@ It is capable of storing, retrieving and deleting simple text documents. It also
 - `make attach` - Attach to the running API container to see the FastAPI output.
 - `make shell` - Attach to the running API container and open an interactive shell.
 - `make stop` - Stop the running API and MongoDB containers.
-- `make test` - Run the tests.'
+- `make test` - Run the tests.
 - `make clean` - Stop the running API and MongoDB containers and remove them along with the volumes **(WARNING: deletes MongoDB data)**.
 - `make add_dependency` - Add a new project dependency. Takes in a `name` argument. Example: `make add_dependency name=numpy`
 - `make add_dev_dependency` - Add a new project development dependency. Takes in a `name` argument. Example: `make add_dev_dependency name=black`
 - `make remove_dependency` - Remove a project dependency. Takes in a `name` argument. Example: `make remove_dependency name=numpy`
 - `make lint` - Run black, flake8 and isort to autofix code.
 - `make lint_check` - Run black, flake8, flake8-isort to check code for linting errors. Used by the pre-commit hook.
+
+### Future improvements
+- Add more convenient way to add texts to the database. (As a txt file, or article parsing from a website.)
+- Add more tests. (For example, tests for the models, however those are cover in some degree by endpoints tests.)
+- Change cache to use redis instead of the default in-memory cache.
+- Add some kind of maximum document size limit.
+- Summarization could be delegated to celery workers and results could be saved in MongoDB. (This would allow for more complex summarization algorithms.)
+- Optimize for production. (For example, use gunicorn instead of uvicorn, use nginx as a reverse proxy, etc.)
+
+### Project assumptions
+- The API is does not require authentication.
+- MongoDB was chosen as the database because it is easy to setup, use and is easier to scale horizontally than a relational database. (Also I wanted to work with something new)
+- Everything is dockerized. No need to install anything on the host machine. (except docker and docker-compose).
+- Since FastAPI is used, the API is async by default. (This is why the MongoDB client is also async.)
