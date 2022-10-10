@@ -12,7 +12,8 @@ It is capable of storing, retrieving and deleting simple text documents. It also
 2. Using `template.env` as a template, create a new file in the base directory called `.env` and fill in the required values.
 3. Run `make install` to build api docker image and install dependencies.
 4. Run `make run` to start the api web server. (You can also run `make attach` to attach to the running container to see the output.)
-5. Run `make clean` To stop and remove all containers and volumes.
+5. Visit `http://localhost:8000/docs` to see the API documentation.
+6. Run `make clean` To stop and remove all containers and volumes.
 
 ## Make commands overview:
 - `make install` - Build the docker image and install dependencies.
