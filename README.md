@@ -31,7 +31,7 @@ It is capable of storing, retrieving and deleting simple text documents. It also
 
 ### Future improvements
 - Add more convenient way to add texts to the database. (As a txt file, or article parsing from a website.)
-- Add more tests. (For example, tests for the models, however those are cover in some degree by endpoints tests.)
+- Add more tests. (For example, tests for the models, however those are covered in some degree by endpoints tests.)
 - Change cache to use redis instead of the default in-memory cache.
 - Add some kind of maximum document size limit.
 - Summarization could be delegated to celery workers and results could be saved in MongoDB. (This would allow for more complex summarization algorithms.)
